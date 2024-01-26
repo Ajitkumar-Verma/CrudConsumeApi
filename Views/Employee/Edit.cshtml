@@ -1,0 +1,97 @@
+﻿@model Employee_Model.EmployeeDetailsModel
+
+
+@{
+    ViewData["Title"] = "Edit Employee";
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<div class="container mt-4">
+    <h2>Edit Employee</h2>
+    @using (Html.BeginForm("Edit", "Employee", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.EmployeeId)
+        <div class="form-control align-content-center">
+            @if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                <div class="alert alert-danger">
+                    <strong>Error! </strong>@errorMessage
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            <br />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <label asp-for="Name">Name:</label>
+                    <input asp-for="Name" class="form-control col-md-4" />
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Gender">Gender:</label>
+                    <input asp-for="Gender" class="form-control" />
+                    <span asp-validation-for="Gender"></span>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <label asp-for="Mobile">Mobile:</label>
+                    <input asp-for="Mobile" class="form-control" />
+                    <span asp-validation-for="Mobile"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Email">Email:</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <label asp-for="Password">Password:</label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="DateOfBirth">Date of Birth:</label>
+                    <input id="dateOfBirth"  asp-for="DateOfBirth" type="date" class="form-control" />
+                    <span asp-validation-for="DateOfBirth"></span>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="col-md-4">
+                        <label>Age:</label>
+                        <input id="age" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <input type="submit" value="Save" class="btn btn-info" />
+                    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+ 
+}
+<script src="~/script/empoyee.js"></script>
